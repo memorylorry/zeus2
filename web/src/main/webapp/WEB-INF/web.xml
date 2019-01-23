@@ -64,6 +64,14 @@
 		<url-pattern>/partition_download.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>jobManualRecover</servlet-name>
+		<servlet-class>com.taobao.zeus.web.JobManualRecoverServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jobManualRecover</servlet-name>
+		<url-pattern>/jobManualRecover.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>dump</servlet-name>
 		<servlet-class>com.taobao.zeus.web.ScheduleDump</servlet-class>
 	</servlet>

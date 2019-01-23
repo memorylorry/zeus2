@@ -68,7 +68,7 @@ public class LoginFilter implements Filter {
 		ZeusUser zeusUser=null;
 		String uri=httpRequest.getRequestURI();
 		if(uri.endsWith(".taobao") || uri.endsWith(".js") || uri.endsWith(".css") || uri.endsWith(".gif") ||
-				uri.endsWith(".jpg") || uri.endsWith(".png") || uri.endsWith("dump.do")){
+				uri.endsWith(".jpg") || uri.endsWith(".png") || uri.endsWith("dump.do") || uri.endsWith("jobManualRecover.do")){
 			chain.doFilter(request, response);
 			return;
 		}
