@@ -6,11 +6,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+import com.taobao.zeus.util.LogAppender;
 import org.apache.hadoop.conf.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -259,13 +258,19 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 		//强制kill 进程
 		if (process != null) {
 			log("WARN Attempting to kill the process ");
+			int pid=-1;
 			try {
 				process.destroy();
-				int pid=getProcessId();
+				pid=getProcessId();
 				Runtime.getRuntime().exec("kill -9 "+pid);
 			} catch (Exception e) {
 				log(e);
 			} finally{
+				//log into killlog.log
+				LogAppender appender = new LogAppender();
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+				String message = "kill -9 "+pid+","+df.format(new Date());
+				appender.append(message);
 				process=null;
 			}
 		}
